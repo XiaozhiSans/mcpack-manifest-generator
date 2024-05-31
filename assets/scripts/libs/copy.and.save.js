@@ -5,7 +5,9 @@ export const cAS = {
 		window.alert("success!");
 	},
 	save() {
-		let blob = new Blob([document.querySelector("input#result").value], {
+		if(eval(result.getAttribute("isUUID"))) return;
+		if(result.value == '') return;
+		let blob = new Blob([result.value], {
 			type: "text/json;charset=utf-8"
 		});
 		let save = document.querySelector("a#save");

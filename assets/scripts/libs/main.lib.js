@@ -1,3 +1,5 @@
+globalThis.result = document.querySelector("#result");
+
 export const mcpackM = {
 	Manifest: function(name, description, version, minBedrockVersion, type) {
 		let mBv = minBedrockVersion.split('.');
@@ -30,21 +32,29 @@ export const mcpackM = {
 			alert("min bedrock version is too low!!\nlowest: 0.16.0");
 			return;
 		}
-		document.querySelector("input#result").value = (JSON.stringify(new this.Manifest(mcPackInfo.get("name"), mcPackInfo.get("description"),
-		mcPackInfo.get("version"), mBv, mcPackInfo.get("type"))));
+		result.setAttribute("isUUID", false);
+		result.value = (JSON.stringify(new this.Manifest(mcPackInfo.get("name"), mcPackInfo.get("description"), mcPackInfo.get("version"), mBv, mcPackInfo.get("type"))));
+		document.querySelector("#buttonPanel").style.display = "inline";
 		window.alert("success!");
 	},
 	version: {
-		number: [0, 1, 0],
-		build: "20240530",
+		number: [0, 2, 1],
+		build: "20240531",
 		name: "beta"
 	},
 	getVer() {
 		let version = this.version;
 		return `${version.name[0].toUpperCase() + version.name.slice(1)} v${version.number.join('.')}(${version.build})`;
+	},
+	getUUID() {
+		result.setAttribute("isUUID", true);
+		result.value = mcpackM.generateUUID();
+		document.querySelector("#buttonPanel").style.display = 'inline';
 	}
 }
 
-window.onload = document.querySelector("[mcpackMv]").innerHTML = mcpackM.getVer();
+document.querySelectorAll("[mcpackMv]").forEach(element => {
+	element.innerHTML = mcpackM.getVer();
+});
 
 console.log(`mcpackM version: ${mcpackM.getVer()}`);

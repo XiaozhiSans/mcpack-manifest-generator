@@ -1,7 +1,7 @@
 export const main = {
 	closeSider: () => {
 		playSound(sounds.hide);
-		document.querySelector("sider").style.cssText = "/* width: 0; opacity: 0; */ left: calc(-100vw);";
+		document.querySelector("sider").style.cssText = "/* width: 0; opacity: 0; */ left: calc(-140vw);";
 		document.querySelector("button#sidebar").setAttribute("onclick", "main.sidebar();");
 		document.querySelector("mask").style.cssText = "opacity: 0; pointer-events: none;";
 	},

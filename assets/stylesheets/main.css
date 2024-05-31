@@ -1,0 +1,40 @@
+.flex {
+	align-items: stretch; flex-direction: column;
+}
+
+button.icon:not(header>button):is(:hover, :focus) {
+	background-color: unset;
+	opacity: 0.7;
+}
+noscript {
+	width: calc(100vw);
+	height: calc(100vh);
+	position: fixed;
+	background-color: #0008;
+	z-index: 100;
+}
+noscript>content {
+	position: relative;
+	color: #fff;
+}
+sider {
+	width: calc(40vw);
+	left: calc(-140vw);
+}
+sider>button {
+	margin-right: 4px;
+}
+@media screen and (max-width: 768px) {
+	.box>button {
+		margin-bottom: 6px;
+	}
+	sider {
+		width: calc(60vw);
+	}
+	sider>button {
+		margin-right: 0;
+	}
+	h1.title {
+		font-size: 26px;
+	}
+}

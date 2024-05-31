@@ -47,7 +47,7 @@ a {
 }
 a:not(.disabled)::after {
 	margin-left: 4px;
-	content: url(../../assets/images/externalLink-0e493.png);
+	content: url(../../assets/res/externalLink-0e493.png);
 	display: inline-block;
 	width: 10px;
 	height: 10px;

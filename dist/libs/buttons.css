@@ -51,7 +51,7 @@ button.normal {
 }
 button.normal.link::before {
 	margin-left: 2px;
-	content: url(../../assets/images/externalLink-1fa23.png);
+	content: url(../../assets/res/externalLink-1fa23.png);
 	width: 10px;
 	height: 10px;
 }
@@ -81,7 +81,7 @@ button.normal.dark {
 }
 button.normal.dark.link::before {
 	margin-left: 2px;
-	content: url(../../assets/images/externalLink-0e493.png);
+	content: url(../../assets/res/externalLink-0e493.png);
 	width: 10px;
 	height: 10px;
 }

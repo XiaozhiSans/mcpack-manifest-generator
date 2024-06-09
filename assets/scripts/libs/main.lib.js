@@ -28,8 +28,12 @@ export const mcpackM = {
 	generation() {
 		const mcPackInfo = new FormData(document.querySelector("form#mcPackInfo"));
 		let mBv = mcPackInfo.get("minBedrockVersion");
-		if(mBv.split('.')[0] == 0 && mBv.split('.')[1] < 16) {
-			alert("min bedrock version is too low!!\nlowest: 0.16.0");
+		if(mBv.split('.')[0] > 1) {
+			alert(`what? minecraft has been update to ${mBv.join('.')}???`);
+			return;
+		}
+		if(mBv.split('.')[0] < 1 && mBv.split('.')[1] < 8) {
+			alert("min bedrock version is too low!!\nlowest: 1.8.0");
 			return;
 		}
 		result.setAttribute("isUUID", false);
@@ -38,8 +42,8 @@ export const mcpackM = {
 		window.alert("success!");
 	},
 	version: {
-		number: [0, 2, 1],
-		build: "20240531",
+		number: [0, 2, 2],
+		build: "20240609",
 		name: "beta"
 	},
 	getVer() {
@@ -52,9 +56,5 @@ export const mcpackM = {
 		document.querySelector("#buttonPanel").style.display = 'inline';
 	}
 }
-
-document.querySelectorAll("[mcpackMv]").forEach(element => {
-	element.innerHTML = mcpackM.getVer();
-});
 
 console.log(`mcpackM version: ${mcpackM.getVer()}`);

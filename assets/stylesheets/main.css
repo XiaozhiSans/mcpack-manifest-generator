@@ -1,3 +1,19 @@
+@import url(https://fastly.jsdelivr.net/gh/FortAwesome/Font-Awesome@6.5.2/css/all.min.css);
+.faI::after {
+	color: #0f0;
+	content: "true";
+}
+.faV::after {
+	content: "v6.5.2";
+}
+:is(.fa, .fa-brands, .fa-solid):is(button>i) {
+	margin-left: 2px;
+}
+:is(.fa, .fa-brands, .fa-solid):not(button>i) {
+	width: 1em;
+	margin-left: 6px;
+	margin-right: 6px;
+}
 .flex {
 	align-items: stretch; flex-direction: column;
 }
@@ -23,6 +39,12 @@ sider {
 }
 sider>button {
 	margin-right: 4px;
+}
+info {
+	color: #fff6;
+	display: block;
+	position: relative;
+	z-index: 101;
 }
 @media screen and (max-width: 768px) {
 	.box>button {

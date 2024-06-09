@@ -5,7 +5,7 @@
 		<meta name="author" content="XiaozhiSans">
 		<meta name="description" content="A generator to help developers create Minecraft: Bedrock Edition Pack Manifests">
 		<meta name="keywords" content="mcpack, manifest, minecraft addon, minecraft addons, mcaddon, MCPack Manifest Generator, MCPack 清单生成器">
-		<link rel="stylesheet" type="text/css" href="./dist/preload.css">
+		<link rel="stylesheet" type="text/css" href="https://xiaozhisans.off.pw/ore-ui-web/dist/preload.css">
 		<link rel="manifest" href="manifest.json">
 
 		<meta name="mobile-web-app-capable" content="yes">
@@ -27,19 +27,14 @@
 
 	<body>
 		<noscript>
-			<content>Sorry, but this website can't work without JavaScript.</content>
-			<span style="position: fixed; right: 0; bottom: 0; color: red;">No JavaScript!!</span>
+			<content>Sorry, but this website <span style="color: #f00; font-style: italic; font-weight: bold;">can't</span> work <span style="color: #f00;">without</span> <span style="font-style: italic; font-weight: bold;">JavaScript</span>.</content>
 		</noscript>
 		<loader>
-			<content>
-				<img src="assets/res/animation-074ed.gif" alt="Loading..." width="32px" draggable="false">
-			</content>
+			<i class="-icon -loading"></i>
 		</loader>
 
 		<header>
-			<button id="sidebar" class="icon sidebar" onclick="main.sidebar();" tooltip="Sidebar / 侧栏">
-				<img draggable="false" src="assets/res/menu.png" type="image/png">
-			</button>
+			<button id="sidebar" class="icon sidebar" onclick="oreui.main.sidebar();" tooltip="Sidebar / 侧栏"><i class="-icon -menu"></i></button>
 			<h1 appName class="title"></h1>
 			<button id="" class="icon " onclick="" tooltip=""></button>
 		</header>
@@ -49,7 +44,7 @@
 		<sider>
 			<p><br></p>
 			<p><span appName></span> <span mcpackMv></span></p>
-			<p> by XiaozhiSans</p>
+			<p> by <a href="https://github.com/XiaozhiSans" target="_blank">XiaozhiSans</a></p>
 			<p license></p>
 			<span class="flex">
 			<button onclick=" window.open('https://github.com/XiaozhiSans/mcpack-manifest-generator/issues/new')" class="normal link" feedback></button><br>
@@ -83,7 +78,7 @@
 				<input name="type" type="text" required placeholder="E.g.: data">
 			</div>
 			<div class="box flex" style="flex-direction: row; align-items: center;">
-				<button onclick="window.open('https://learn.microsoft.com/en/minecraft/creator/reference/content/addonsreference/examples/addonmanifest'); return false;" class="normal link">Microsoft Learn</button>
+				<button onclick="window.open('https://learn.microsoft.com/en/minecraft/creator/reference/content/addonsreference/examples/addonmanifest'); return false;" class="normal link" style="width: 280px;">Microsoft Learn<i class="fa-brands fa-microsoft"></i></button>
 				<button onclick="mcpackM.getUUID(); return false;" class="button normal" generateUUID></button>
 				<button onclick="" class="normal green" submit></button>
 			</div>
@@ -92,32 +87,36 @@
 				<span style="display: flex; align-items: center;">
 					<h1 class="title" result></h1>
 					<span id="buttonPanel" style="display: none;">
-					<button class="icon" onclick="cAS.copy();" tooltip="Copy / 复制"><img draggable="false" src="assets/res/Copy-9b6af.png"></button>
-					<button class="icon" onclick="cAS.save();" tooltip="Save / 保存"><img draggable="false" src="assets/res/Save-72f24.png"></button>
+					<button class="icon" onclick="cAS.copy();" tooltip="Copy / 复制"><i class="-icon -copy"></i></button>
+					<button class="icon" onclick="cAS.save();" tooltip="Save / 保存"><i class="-icon -save"></i></button>
 					</span>
 				</span>
 				<input isUUID="false" id="result" readonly placeholder="Waiting for generation...">
 			</div>
 
+		<footer>
 			<info><br></info>
-			<info>App Name: <span appName></span></info>
-			<info>Version: <span mcpackMv></span></info>
-			<info>Display Language: <span mcpackMl></span></info>
-			<info>Oreui-web Version: <span><span version></span>(<span update></span>)</span></info>
+			<info>-- <i class="fa-solid fa-screwdriver-wrench"></i> Debug Info --</info>
+			<info><i class="fa-solid fa-box-archive"></i>App Name: <span appName>MCPack Manifest Generator</span></info>
+			<info><i class="fa-solid fa-code-commit"></i>Version: <span mcpackMv>unknown</span></info>
+			<info><i class="fa-solid fa-language"></i>Display Language: <span mcpackMl>en</span></info>
+			<info><i class="fa-solid fa-user"></i>Language Translator: <span translator>--</span></info>
+			<info><i class="fa-brands fa-square-js"></i>JavaScript: <span style="color: #f00;" js>false</span></info>
+			<info><i class="fa-solid fa-wifi"></i>Online: <span onLine>unknown</span></info>
+			<info>-- <i class="fa-solid fa-message"></i> Other Info --</info>
+			<info class="faI"><i class="fa-brands fa-font-awesome"></i>FontAwesome: </info>
+			<info class="faV"><i class="fa-brands fa-font-awesome"></i>FontAwesome Version: </info>
+			<info>💎 Oreui-web: <span oreuiI>unknown</span></info>
+			<info>💎 Oreui-web Version: <span oreuiV>unknown</span></info>
+		</footer>
+
 		</main>
+
 
 		<a id="save" download="manifest.json" href="./" style="display: none;">invisible hand</a>
 
 		<link rel="stylesheet" type="text/css" href="./assets/stylesheets/main.css">
-		<script defer type="text/javascript">
-			if(navigator.serviceWorker) {
-				navigator.serviceWorker.register("sw.js")
-				.then(function(registration) {
-					console.log("Registered events at scope: ", registration.scope);
-				});
-			}
-		</script>
+		<script defer type="module" src="https://xiaozhisans.off.pw/ore-ui-web/dist/all.init.js"></script>
 		<script defer type="module" src="./assets/scripts/main.init.js"></script>
-		<script defer type="module" src="./dist/init.js"></script>
 	</body>
 </html>

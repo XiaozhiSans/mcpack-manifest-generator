@@ -1,34 +1,42 @@
 "use strict";
 
+// 缓存名称
 const cacheName = "mcpackM-cache";
-const startPage = "/";
-const offlinePage = "/";
-const filesToCache = [startPage, offlinePage];
-const neverCacheUrls = [/.*noto\-sans.*/];
 
-// Install
-self.addEventListener('install', function(e) {
-	console.log('PWA service worker installation');
+// 在线页面
+const startPage = "/";
+// 离线页面
+const offlinePage = "/";
+
+// 预缓存项
+const filesToCache = [startPage, offlinePage];
+// 不缓存项
+const neverCacheUrls = [/*NotoSans*/];
+
+
+// 初始化
+self.addEventListener("install", (e) => {
+	console.log("[PWA] Service Worker 初始化");
 	e.waitUntil(
-		caches.open(cacheName).then(function(cache) {
-			console.log('PWA service worker caching dependencies');
-			filesToCache.map(function(url) {
-				return cache.add(url).catch(function (reason) {
-					return console.log('PWA: ' + String(reason) + ' ' + url);
+		caches.open(cacheName).then((cache) => {
+			console.log("[PWA] Service Worker 正在缓存预缓存项");
+			filesToCache.map((url) => {
+				return cache.add(url).catch((reason) => {
+					return console.log(`[PWA] url: ${url}; 原因: ${String(reason)};`);
 				});
 			});
 		})
 	);
 });
 
-// Activate
-self.addEventListener('activate', function(e) {
-	console.log('PWA service worker activation');
+// 激活
+self.addEventListener("activate", (e) => {
+	console.log("[PWA] Service Worker 正在激活");
 	e.waitUntil(
-		caches.keys().then(function(keyList) {
-			return Promise.all(keyList.map(function(key) {
+		caches.keys().then((keyList) => {
+			return Promise.all(keyList.map((key) => {
 				if ( key !== cacheName ) {
-					console.log('PWA old cache removed', key);
+					console.log(`[PWA] 旧的缓存已经移除, key: ${key}`);
 					return caches.delete(key);
 				}
 			}));
@@ -37,38 +45,38 @@ self.addEventListener('activate', function(e) {
 	return self.clients.claim();
 });
 
-// Fetch
-self.addEventListener('fetch', function(e) {
+// 匹配
+self.addEventListener("fetch", (e) => {
 	
-	// Return if the current request url is in the never cache list
-	if ( ! neverCacheUrls.every(checkNeverCacheList, e.request.url) ) {
-		console.log( 'PWA: Current request is excluded from cache.' );
+	// 如果请求在不缓存项内就跳过缓存
+	if(!neverCacheUrls.every(checkNeverCacheList, e.request.url)) {
+		console.log("[PWA] 当前请求在不缓存项内");
 		return;
 	}
 	
-	// Return if request url protocal isn't http or https
-	/* if ( ! e.request.url.match(/^(http|https):\/\//i) )
-		return; */
+	// 如果请求的协议不是 http 或 https 就跳过缓存
+	if(!e.request.url.match(/^(http|https):\/\//i))
+		// return;
 	
-	// Return if request url is from an external domain.
-	/* if ( new URL(e.request.url).origin !== location.origin )
-		return; */
+	// 如果请求来自其他域名就跳过缓存
+	if(new URL(e.request.url).origin !== location.origin)
+		// return;
 	
-	// For POST requests, do not use the cache. Serve offline page if offline.
-	if ( e.request.method !== 'GET' ) {
+	// 对于 POST 请求,不缓存并在离线时提供离线页面
+	if(e.request.method !== "GET") {
 		e.respondWith(
-			fetch(e.request).catch( function() {
+			fetch(e.request).catch(() => {
 				return caches.match(offlinePage);
 			})
 		);
 		return;
 	}
 	
-	// Revving strategy
-	if ( e.request.mode === 'navigate' && navigator.onLine ) {
+	// 跳转策略
+	if(e.request.mode === "navigate" && navigator.onLine) {
 		e.respondWith(
-			fetch(e.request).then(function(response) {
-				return caches.open(cacheName).then(function(cache) {
+			fetch(e.request).then((response) => {
+				return caches.open(cacheName).then((cache) => {
 					cache.put(e.request, response.clone());
 					return response;
 				});
@@ -78,22 +86,23 @@ self.addEventListener('fetch', function(e) {
 	}
 
 	e.respondWith(
-		caches.match(e.request).then(function(response) {
-			return response || fetch(e.request).then(function(response) {
-				return caches.open(cacheName).then(function(cache) {
+		caches.match(e.request).then((response) => {
+			return response || fetch(e.request).then((response) => {
+				return caches.open(cacheName).then((cache) => {
 					cache.put(e.request, response.clone());
 					return response;
 				});
 			});
-		}).catch(function() {
+		}).catch(() => {
 			return caches.match(offlinePage);
 		})
 	);
 });
 
-// Check if current url is in the neverCacheUrls list
-function checkNeverCacheList(url) {
-	if ( this.match(url) ) {
+// 辅助函数
+// 检测传入的 url 是否在不缓存项
+checkNeverCacheList = (url) => {
+	if(this.match(url)) {
 		return false;
 	}
 	return true;

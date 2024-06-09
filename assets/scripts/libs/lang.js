@@ -1,5 +1,5 @@
-import {languages} from "./languages.js";
-globalThis.languages = languages;
+import languages from "./languages.json" with {type: "json"};
+// globalThis.languages = languages;
 
 export const lang = {
 	change(lang) {
@@ -11,12 +11,12 @@ export const lang = {
 		for(let cookie of cookies) {
 			if(cookie.startsWith("lang")) {
 				f = true;
-				globalThis.Lang = cookie.split('=')[1];
-				lang.setLang(Lang);
+				globalThis.displayLang = cookie.split('=')[1];
+				lang.setLang(displayLang);
 				break;
 			} else continue;
 		}
-		(f)? null: lang.init();
+		(f)? null: this.init();
 	},
 	init() {
 		if(navigator.language) {
@@ -35,13 +35,16 @@ export const lang = {
 	},
 	setLang(langName) {
 		console.log(`will use "${langName}" as display language`);
-		document.querySelector("[mcpackMl]").innerHTML = langName;
-		let lang = eval(`languages.${langName}`);
-		let keys = Object.keys(lang);
-		let values = Object.values(lang);
+		let displayLang = eval(`languages.${langName}`);
 		document.querySelector("html").lang = langName;
-		for(let i in keys) {
-			for(let j of document.querySelectorAll(`[${keys[i]}]`)) j.innerHTML = values[i];
-		}
+
+		displayLang.forEach(l => {
+			lang.innerText(l[0], l[1]);
+		});
+	},
+	innerText(ele, text) {
+		findEles(`[${ele}]`).forEach(e => {
+			e.innerHTML = text;
+		});
 	}
 }

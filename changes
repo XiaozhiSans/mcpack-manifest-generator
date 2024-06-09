@@ -1,3 +1,9 @@
+v0.2.2(20240609) beta
+[+] add fontawesome
+[+] update oreui-web to v20240604(2024/06/04)
+[=] improve ui and mult-language
+[=] improve service worker
+
 v0.2.1(20240531) beta
 [√] fix first time open can't display texts @teaSummer
 [+] support pwa

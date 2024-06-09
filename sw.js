@@ -101,7 +101,7 @@ self.addEventListener("fetch", (e) => {
 
 // 辅助函数
 // 检测传入的 url 是否在不缓存项
-checkNeverCacheList = (url) => {
+const checkNeverCacheList = (url) => {
 	if(this.match(url)) {
 		return false;
 	}

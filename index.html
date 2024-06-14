@@ -5,7 +5,7 @@
 		<meta name="author" content="XiaozhiSans">
 		<meta name="description" content="A generator to help developers create Minecraft: Bedrock Edition Pack Manifests">
 		<meta name="keywords" content="mcpack, manifest, minecraft addon, minecraft addons, mcaddon, MCPack Manifest Generator, MCPack 清单生成器">
-		<link rel="stylesheet" type="text/css" href="https://xiaozhisans.off.pw/ore-ui-web/dist/preload.css">
+		<link rel="stylesheet" type="text/css" href="https://xsawa.dev.tc/ore-ui-web/dist/preload.css">
 		<link rel="manifest" href="manifest.json">
 
 		<meta name="mobile-web-app-capable" content="yes">
@@ -18,6 +18,8 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 		<meta name="msapplication-starturl" content="/">
 		<meta name="viewport" content="width=device-width, initial-scale=0.9, shrink-to-fit=no">
+
+		<meta name="msvalidate.01" content="596A6714E6149ACBAFEC59929BDCACEC">
 
 		<link rel="icon" type="image/x-icon" sizes="16x16 24x24" href="assets/icons/favicon.ico">
 		<link rel="apple-touch-icon" type="image/x-icon" sizes="16x16 24x24" href="assets/icons/favicon.ico">
@@ -34,9 +36,9 @@
 		</loader>
 
 		<header>
-			<button id="sidebar" class="icon sidebar" onclick="oreui.main.sidebar();" tooltip="Sidebar / 侧栏"><i class="-icon -menu"></i></button>
+			<button type="button" id="sidebar" class="icon sidebar" onclick="oreui.main.sidebar();" tooltip="Menu"><i class="-icon -menu"></i></button>
 			<h1 appName class="title"></h1>
-			<button id="" class="icon " onclick="" tooltip=""></button>
+			<button type="button" id="" class="icon " onclick="" tooltip=""></button>
 		</header>
 		
 		<mask style="opacity: 0;"></mask>
@@ -44,11 +46,15 @@
 		<sider>
 			<p><br></p>
 			<p><span appName></span> <span mcpackMv></span></p>
-			<p> by <a href="https://github.com/XiaozhiSans" target="_blank">XiaozhiSans</a></p>
+			<p> by <a href="https://github.com/XiaozhiSans" target="_blank" rel="noopener">XiaozhiSans</a></p>
 			<p license></p>
 			<span class="flex">
-			<button onclick=" window.open('https://github.com/XiaozhiSans/mcpack-manifest-generator/issues/new')" class="normal link" feedback></button><br>
-			<button onclick=" window.open('https://github.com/XiaozhiSans/mcpack-manifest-generator')" class="normal link" github></button>
+			<button type="button" onclick="window.open('https://github.com/XiaozhiSans/mcpack-manifest-generator/issues/new');" class="normal link" feedback></button><br>
+			<button type="button" onclick="window.open('https://github.com/XiaozhiSans/mcpack-manifest-generator');" class="normal link" github></button>
+			</span>
+			<p linkExchange></p>
+			<span class="flex">
+			<button type="button" onclick="window.open('https://mcisee.top');" class="normal skyblue link">MCiSEE</button>
 			</span>
 		</sider>
 
@@ -58,37 +64,37 @@
 			</div>
 			<form id="mcPackInfo" onsubmit="mcpackM.generation(); return false;">
 			<div class="box flex">
-				<span><h1 class="title" style="display: inline;">1.</h1>[*]<span packName></span></span>
+				<span><h2 class="title" style="display: inline;">1.</h2>[*]<span packName></span></span>
 				<input name="name" type="text" required placeholder="E.g.: My Pack">
 			</div>
 			<div class="box flex">
-				<span><h1 class="title" style="display: inline;">2.</h1><span packDescription></span></span>
+				<span><h2 class="title" style="display: inline;">2.</h2><span packDescription></span></span>
 				<input name="description" type="text" placeholder="E.g.: This is my pack">
 			</div>
 			<div class="box flex">
-				<span><h1 class="title" style="display: inline;">3.</h1>[*]<span packVersion></span></span>
+				<span><h2 class="title" style="display: inline;">3.</h2>[*]<span packVersion></span></span>
 				<input name="version" minlength="5" required placeholder="E.g.: 1.0.0">
 			</div>
 			<div class="box flex">
-				<span><h1 class="title" style="display: inline;">4.</h1>[*]<span minBedrockVersion></span></span>
+				<span><h2 class="title" style="display: inline;">4.</h2>[*]<span minBedrockVersion></span></span>
 				<input name="minBedrockVersion" minlength="5" required placeholder="E.g.: 1.14.0">
 			</div>
 			<div class="box flex">
-				<span><h1 class="title" style="display: inline;">5.</h1>[*]<span packType></span></span>
+				<span><h2 class="title" style="display: inline;">5.</h2>[*]<span packType></span></span>
 				<input name="type" type="text" required placeholder="E.g.: data">
 			</div>
 			<div class="box flex" style="flex-direction: row; align-items: center;">
-				<button onclick="window.open('https://learn.microsoft.com/en/minecraft/creator/reference/content/addonsreference/examples/addonmanifest'); return false;" class="normal link" style="width: 280px;">Microsoft Learn<i class="fa-brands fa-microsoft"></i></button>
-				<button onclick="mcpackM.getUUID(); return false;" class="button normal" generateUUID></button>
-				<button onclick="" class="normal green" submit></button>
+				<button type="button" onclick="window.open('https://learn.microsoft.com/en/minecraft/creator/reference/content/addonsreference/examples/addonmanifest'); return false;" class="normal link" style="width: 280px;">Microsoft Learn<i class="fa-brands fa-microsoft"></i></button>
+				<button type="button" onclick="mcpackM.getUUID(); return false;" class="button normal" generateUUID></button>
+				<button type="submit" onclick="" class="normal green" submit></button>
 			</div>
 			</form>
 			<div class="box flex">
 				<span style="display: flex; align-items: center;">
 					<h1 class="title" result></h1>
 					<span id="buttonPanel" style="display: none;">
-					<button class="icon" onclick="cAS.copy();" tooltip="Copy / 复制"><i class="-icon -copy"></i></button>
-					<button class="icon" onclick="cAS.save();" tooltip="Save / 保存"><i class="-icon -save"></i></button>
+					<button type="button" class="icon" onclick="cAS.copy();" tooltip="Copy"><i class="-icon -copy"></i></button>
+					<button type="button" class="icon" onclick="cAS.save();" tooltip="Save"><i class="-icon -save"></i></button>
 					</span>
 				</span>
 				<input isUUID="false" id="result" readonly placeholder="Waiting for generation...">
@@ -113,10 +119,10 @@
 		</main>
 
 
-		<a id="save" download="manifest.json" href="./" style="display: none;">invisible hand</a>
+		<a id="save" download="manifest.json" href="#" style="display: none;">invisible hand</a>
 
 		<link rel="stylesheet" type="text/css" href="./assets/stylesheets/main.css">
-		<script defer type="module" src="https://xiaozhisans.off.pw/ore-ui-web/dist/all.init.js"></script>
+		<script defer type="module" src="https://xsawa.dev.tc/ore-ui-web/dist/all.init.js"></script>
 		<script defer type="module" src="./assets/scripts/main.init.js"></script>
 	</body>
 </html>

@@ -1,7 +1,7 @@
 <div align="center">
 <div align="right">
 
-[简体中文](./README.zh.md) | English
+[简体中文](./README-zh.md) | English
 
 <sup>Language translation may not be 100% acc</sup>
 
